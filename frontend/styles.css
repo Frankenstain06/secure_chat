@@ -1,0 +1,102 @@
+:root {
+  --ink: #1d2724;
+  --muted: #69746f;
+  --paper: #f4efe6;
+  --panel: #fffdf8;
+  --line: #d8d6ca;
+  --accent: #cf5b3d;
+  --accent-dark: #a9452e;
+  --mint: #c9dfd0;
+  --shadow: 0 22px 70px rgba(44, 46, 37, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: "DM Sans", sans-serif;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  opacity: .46;
+  background-image: linear-gradient(rgba(29, 39, 36, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(29, 39, 36, .045) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+
+.page-shell {
+  display: grid;
+  grid-template-columns: minmax(280px, .86fr) minmax(380px, 1fr);
+  min-height: 100vh;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 7vw;
+  gap: clamp(48px, 9vw, 150px);
+  align-items: center;
+}
+
+.intro-panel { padding-bottom: 3rem; }
+
+.eyebrow {
+  margin: 0 0 1.4rem;
+  color: var(--accent-dark);
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+
+h1, h2 { font-family: "Space Grotesk", sans-serif; letter-spacing: -.045em; }
+h1 { max-width: 520px; margin: 0; font-size: clamp(3rem, 6vw, 5.8rem); line-height: .96; }
+h2 { margin: 0; font-size: clamp(2rem, 3vw, 3rem); line-height: 1; }
+
+.intro-copy { max-width: 370px; margin: 2rem 0 0; color: var(--muted); font-size: 1.1rem; line-height: 1.6; }
+
+.signal { display: flex; align-items: end; height: 78px; gap: 7px; margin: 3.5rem 0 1.4rem; }
+.signal span { display: block; width: 8px; border-radius: 4px; background: var(--accent); transform-origin: bottom; animation: pulse 2.4s ease-in-out infinite; }
+.signal span:nth-child(1) { height: 25%; animation-delay: -.2s; }
+.signal span:nth-child(2) { height: 62%; animation-delay: -.8s; }
+.signal span:nth-child(3) { height: 100%; animation-delay: -1.4s; }
+.signal span:nth-child(4) { height: 72%; animation-delay: -1.8s; }
+.signal span:nth-child(5) { height: 42%; animation-delay: -2.2s; }
+
+.status-line { display: flex; align-items: center; gap: .55rem; margin: 0; color: var(--muted); font-size: .82rem; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: #4b9c69; }
+
+.form-panel { max-width: 540px; width: 100%; padding: clamp(2rem, 5vw, 4.5rem); background: rgba(255, 253, 248, .9); box-shadow: var(--shadow); }
+.form-heading > p:last-child { margin: 1.1rem 0 2.7rem; color: var(--muted); }
+
+form { display: flex; flex-direction: column; }
+label { margin: 1.35rem 0 .55rem; font-size: .85rem; font-weight: 700; }
+input { width: 100%; border: 1px solid var(--line); border-radius: 0; padding: 1rem 1.05rem; color: var(--ink); background: #fff; font: inherit; outline: none; transition: border-color .2s, box-shadow .2s; }
+input:focus { border-color: var(--accent); box-shadow: 3px 3px 0 var(--mint); }
+input:invalid:not(:placeholder-shown) { border-color: var(--accent); }
+input::placeholder { color: #a5aaa2; }
+.field-hint { margin-top: .45rem; color: var(--muted); font-size: .72rem; }
+.password-wrap { position: relative; }
+.password-wrap input { padding-right: 5rem; }
+.password-toggle { position: absolute; top: 50%; right: .7rem; border: 0; padding: .3rem; color: var(--accent-dark); background: transparent; font: inherit; font-size: .75rem; font-weight: 700; cursor: pointer; transform: translateY(-50%); }
+
+.submit-button { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 2.5rem; border: 0; padding: 1.1rem 1.25rem; color: #fffdf8; background: var(--ink); font: inherit; font-weight: 700; cursor: pointer; transition: background .2s, transform .2s; }
+.submit-button:hover { background: var(--accent-dark); transform: translateY(-2px); }
+.submit-button:disabled { cursor: wait; opacity: .7; transform: none; }
+.button-arrow { font-size: 1.3rem; }
+.form-message { min-height: 1.3rem; margin: 1rem 0 0; font-size: .82rem; line-height: 1.5; }
+.form-message.success { color: #287247; }
+.form-message.error { color: var(--accent-dark); }
+
+@keyframes pulse { 0%, 100% { transform: scaleY(.72); } 50% { transform: scaleY(1); } }
+
+@media (max-width: 760px) {
+  .page-shell { display: block; padding: 3.5rem 1.25rem; }
+  .intro-panel { padding-bottom: 4rem; }
+  h1 { font-size: clamp(3rem, 15vw, 5rem); }
+  .signal { margin-top: 2.5rem; }
+  .form-panel { padding: 2rem 1.35rem; }
+}
